@@ -3,6 +3,6 @@ module.exports = {
   reactStrictMode: true,
   images: {
     dangerouslyAllowSVG: true,
-    domains: ['rb.gy'],
+    domains: ['image.tmdb.org', 'rb.gy'],
   },
 };
