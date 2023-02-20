@@ -9,15 +9,13 @@
 So far I've created:
 - Netflix home page (I mean it's similar 😅)
 - IMDb API integration
-- Reviews
 
 ## 💻 What did I use?
 
 * Next.js
-* GSAP
+* IMDb for movies data
 * TailwindCSS
-* Styled components
 * TypeScript
 
-## 👉 Open [meanslate.app](https://meanslate.vercel.app/) to view it in the browser.
+## 👉 Open [netflix.clone.app](https://my-clon-netflix.vercel.app/) to view it in the browser.
 
