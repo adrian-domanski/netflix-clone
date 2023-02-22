@@ -7,15 +7,21 @@
 ℹ️ This is a Netflix clone with IMDb API integration, and some Stripe magic for subscriptions
 
 So far I've created:
-- Netflix home page (I mean it's similar 😅)
+- Netflix home page
 - IMDb API integration
+- Firebase authentication and session persistence
+- Movie trailers when you click on thumbnails / more info
+- About movie popup
 
 ## 💻 What did I use?
 
 * Next.js
-* IMDb for movies data
+* IMDb  (movies data)
 * TailwindCSS
 * TypeScript
+* Firebase (auth)
+* Recoil.js (state management)
+* ReactPlayer (video players)
 
 ## 🎫 Example credentials
 login: example@gmail.com   
