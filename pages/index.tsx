@@ -33,7 +33,11 @@ const Home: React.FC<Props> = ({
   const showModal = useRecoilValue(modalState);
 
   return (
-    <div className='relative min-h-screen bg-gradient-to-b from-gray-900/10 to-[#010511] lg:h-[140vh]'>
+    <div
+      className={`relative min-h-screen bg-gradient-to-b from-gray-900/10 to-[#010511] lg:h-[140vh] ${
+        showModal && `!h-screen overflow-hidden`
+      }`}
+    >
       <Head>
         <title>Home - Netflix</title>
         <link rel='icon' href='/favicon.ico' />
