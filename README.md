@@ -17,5 +17,9 @@ So far I've created:
 * TailwindCSS
 * TypeScript
 
+## 🎫 Example credentials
+login: example@gmail.com
+password: 123456
+
 ## 👉 Open [netflix.clone.app](https://my-clon-netflix.vercel.app/) to view it in the browser.
 
