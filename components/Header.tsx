@@ -3,9 +3,11 @@ import Image from 'next/image';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { FaBell } from 'react-icons/fa';
 import Link from 'next/link';
+import useAuth from '../hooks/useAuth';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const { logout } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,13 +46,12 @@ const Header = () => {
         <AiOutlineSearch className='hidden sm:inline h-6 w-6' />
         <p className='hidden lg:inline'>Kids</p>
         <FaBell className='h-6 w-6' />
-        <Link href='/account'>
-          <img
-            src='https://rb.gy/g1pwyx'
-            alt=''
-            className='cursor-pointer rounded'
-          />
-        </Link>
+        <img
+          src='https://rb.gy/g1pwyx'
+          onClick={logout}
+          alt=''
+          className='cursor-pointer rounded'
+        />
       </div>
     </header>
   );

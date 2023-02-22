@@ -11,6 +11,7 @@ export interface IMovie {
   popularity: number;
   poster_path: string;
   release_date?: string;
+  first_air_date?: string;
   media_type?: string;
   title: string;
   video: boolean;
