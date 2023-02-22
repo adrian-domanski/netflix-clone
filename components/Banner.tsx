@@ -4,6 +4,8 @@ import Image from 'next/image';
 import { baseUrl } from '../constants/movie';
 import { FaPlay } from 'react-icons/fa';
 import { HiInformationCircle } from 'react-icons/hi';
+import { useRecoilState } from 'recoil';
+import { modalState, movieState } from '../atoms/modalAtom';
 
 interface IProps {
   netflixOriginals: IMovie[];
@@ -11,6 +13,8 @@ interface IProps {
 
 const Banner: React.FC<IProps> = ({ netflixOriginals }) => {
   const [movie, setMovie] = useState<IMovie | null>(null);
+  const [showModal, setShowModal] = useRecoilState(modalState);
+  const [currentMovie, setCurrentMovie] = useRecoilState(movieState);
 
   useEffect(() => {
     setMovie(
@@ -42,7 +46,13 @@ const Banner: React.FC<IProps> = ({ netflixOriginals }) => {
           Play
         </button>
 
-        <button className='bannerButton bg-[gray]/70'>
+        <button
+          className='bannerButton bg-[gray]/70'
+          onClick={() => {
+            setShowModal(true);
+            setCurrentMovie(movie);
+          }}
+        >
           <HiInformationCircle className='h-5 w-5 md:h-8 md:w-8' /> More Info
         </button>
       </div>

@@ -18,6 +18,11 @@ export interface IMovie {
   vote_count: number;
 }
 
+export interface IGenre {
+  id: number;
+  name: string;
+}
+
 export interface Element {
   type:
     | 'Bloopers'

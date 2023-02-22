@@ -1,7 +1,10 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import { useRecoilValue } from 'recoil';
+import { modalState } from '../atoms/modalAtom';
 import Banner from '../components/Banner';
 import Header from '../components/Header';
+import NetflixModal from '../components/Modal';
 import Row from '../components/Row';
 import { IMovie } from '../typings';
 import requests from '../utils/requests';
@@ -27,7 +30,8 @@ const Home: React.FC<Props> = ({
   topRated,
   trendingNow,
 }) => {
-  console.log(netflixOriginals);
+  const showModal = useRecoilValue(modalState);
+
   return (
     <div className='relative min-h-screen bg-gradient-to-b from-gray-900/10 to-[#010511] lg:h-[140vh]'>
       <Head>
@@ -50,6 +54,8 @@ const Home: React.FC<Props> = ({
           <Row title='Trending Now' movies={trendingNow} />
         </section>
       </main>
+
+      {showModal && <NetflixModal />}
     </div>
   );
 };
