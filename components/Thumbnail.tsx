@@ -3,9 +3,10 @@ import { IMovie } from '../typings';
 import Image from 'next/image';
 import { useRecoilState } from 'recoil';
 import { modalState, movieState } from '../atoms/modalAtom';
+import { DocumentData } from 'firebase/firestore';
 
 interface IProps {
-  movie: IMovie;
+  movie: IMovie | DocumentData;
 }
 
 function Thumbnail({ movie }: IProps) {

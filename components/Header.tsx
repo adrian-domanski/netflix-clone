@@ -3,12 +3,10 @@ import Image from 'next/image';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { FaBell } from 'react-icons/fa';
 import Link from 'next/link';
-import useAuth from '../hooks/useAuth';
 import BasicMenu from './BasicMenu';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const { logout } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {

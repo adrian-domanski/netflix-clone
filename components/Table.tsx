@@ -8,7 +8,6 @@ interface IProps {
 }
 
 function Table({ products, selectedPlan }: IProps) {
-  console.log(products);
   return (
     <table>
       <tbody className='divide-y divide-[gray]'>

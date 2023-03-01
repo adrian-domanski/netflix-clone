@@ -126,8 +126,6 @@ function Modal() {
     }
   };
 
-  console.log(addedToList);
-
   return (
     <MuiModal
       open={showModal}
