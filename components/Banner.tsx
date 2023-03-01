@@ -41,7 +41,13 @@ const Banner: React.FC<IProps> = ({ netflixOriginals }) => {
         {movie?.overview}
       </p>
       <div className='flex space-x-3'>
-        <button className='bannerButton bg-white text-black'>
+        <button
+          className='bannerButton bg-white text-black'
+          onClick={() => {
+            setShowModal(true);
+            setCurrentMovie(movie);
+          }}
+        >
           <FaPlay className='h-4 w-4 text-black md:h-7 md:w-7' />
           Play
         </button>

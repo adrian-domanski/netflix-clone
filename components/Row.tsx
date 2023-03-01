@@ -1,3 +1,4 @@
+import { DocumentData } from 'firebase/firestore';
 import { useRef, useState } from 'react';
 import { HiChevronLeft, HiChevronRight } from 'react-icons/hi';
 import { IMovie } from '../typings';
@@ -5,7 +6,7 @@ import Thumbnail from './Thumbnail';
 
 interface Props {
   title: string;
-  movies: IMovie[];
+  movies: IMovie[] | DocumentData[];
 }
 
 function Row({ title, movies }: Props) {

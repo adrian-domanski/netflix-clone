@@ -1,26 +1,49 @@
-import React, { useEffect, useState } from 'react';
-import Modal from '@mui/material/Modal';
-import { Box, Typography } from '@mui/material';
+import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
-import { modalState, movieState } from '../atoms/modalAtom';
+import ReactPlayer from 'react-player/lazy';
 import {
+  FaCheck,
   FaPlay,
   FaPlus,
   FaThumbsUp,
   FaTimes,
-  FaVolumeDown,
   FaVolumeMute,
   FaVolumeUp,
 } from 'react-icons/fa';
-import { Element, IGenre } from '../typings';
-import ReactPlayer from 'react-player/lazy';
+import { Element, IGenre, IMovie } from '../typings';
+import MuiModal from '@mui/material/Modal';
+import {
+  collection,
+  deleteDoc,
+  doc,
+  DocumentData,
+  onSnapshot,
+  setDoc,
+} from 'firebase/firestore';
+import { db } from '../firebase';
+import useAuth from '../hooks/useAuth';
+import toast, { Toaster } from 'react-hot-toast';
+import { modalState, movieState } from '../atoms/modalAtom';
 
-function NetflixModal() {
-  const [showModal, setShowModal] = useRecoilState(modalState);
+function Modal() {
   const [movie, setMovie] = useRecoilState(movieState);
   const [trailer, setTrailer] = useState('');
-  const [genres, setGenres] = useState<IGenre[]>([]);
+  const [showModal, setShowModal] = useRecoilState(modalState);
   const [muted, setMuted] = useState(false);
+  const [genres, setGenres] = useState<IGenre[]>([]);
+  const [addedToList, setAddedToList] = useState(false);
+  const { user } = useAuth();
+  const [movies, setMovies] = useState<DocumentData[] | IMovie[]>([]);
+
+  const toastStyle = {
+    background: 'white',
+    color: 'black',
+    fontWeight: 'bold',
+    fontSize: '16px',
+    padding: '15px',
+    borderRadius: '9999px',
+    maxWidth: '1000px',
+  };
 
   useEffect(() => {
     if (!movie) return;
@@ -47,23 +70,79 @@ function NetflixModal() {
     fetchMovie();
   }, [movie]);
 
-  const handleClose = () => setShowModal(false);
+  const handleClose = () => {
+    setShowModal(false);
+    setMovie(null);
+    toast.dismiss();
+  };
 
-  console.log(trailer);
+  // Find all the movies in the user's list
+  useEffect(() => {
+    if (user) {
+      return onSnapshot(
+        collection(db, 'customers', user.uid, 'myList'),
+        (snapshot) => setMovies(snapshot.docs)
+      );
+    }
+  }, [db, movie?.id]);
+
+  // Check if the movie is already in the user's list
+  useEffect(
+    () =>
+      setAddedToList(
+        movies.findIndex((result) => result.data().id === movie?.id) !== -1
+      ),
+    [movies]
+  );
+
+  const handleList = async () => {
+    if (addedToList) {
+      await deleteDoc(
+        doc(db, 'customers', user!.uid, 'myList', movie?.id.toString()!)
+      );
+
+      toast(
+        `${movie?.title || movie?.original_name} has been removed from My List`,
+        {
+          duration: 8000,
+          style: toastStyle,
+        }
+      );
+    } else {
+      await setDoc(
+        doc(db, 'customers', user!.uid, 'myList', movie?.id.toString()!),
+        {
+          ...movie,
+        }
+      );
+
+      toast(
+        `${movie?.title || movie?.original_name} has been added to My List.`,
+        {
+          duration: 8000,
+          style: toastStyle,
+        }
+      );
+    }
+  };
+
+  console.log(addedToList);
 
   return (
-    <Modal
+    <MuiModal
       open={showModal}
       onClose={handleClose}
-      className='fixed !top-7 right-0 z-50 mx-auto w-full max-w-5xl overflow-hidden overflow-y-scroll rounded-md scrollbar-hide'
+      className='fixed !top-7 left-0 right-0 z-50 mx-auto w-full max-w-5xl overflow-hidden overflow-y-scroll rounded-md scrollbar-hide'
     >
       <>
+        <Toaster position='bottom-center' />
         <button
+          className='modalButton absolute right-5 top-5 !z-40 h-9 w-9 border-none bg-[#181818] hover:bg-[#181818]'
           onClick={handleClose}
-          className='modalButton absolute right-5 top-5 !z-40 h-9 w-9 border-none bg-[#181818]'
         >
           <FaTimes className='h-6 w-6' />
         </button>
+
         <div className='relative pt-[56.25%]'>
           <ReactPlayer
             url={`https://www.youtube.com/watch?v=${trailer}`}
@@ -79,31 +158,31 @@ function NetflixModal() {
                 <FaPlay className='h-7 w-7 text-black' />
                 Play
               </button>
-
-              <button className='modalButton'>
-                <FaPlus className='w-7 h-7' />
+              <button className='modalButton' onClick={handleList}>
+                {addedToList ? (
+                  <FaCheck className='h-7 w-7' />
+                ) : (
+                  <FaPlus className='h-7 w-7' />
+                )}
               </button>
-
               <button className='modalButton'>
-                <FaThumbsUp className='w-7 h-7' />
+                <FaThumbsUp className='h-6 w-6' />
               </button>
             </div>
-
-            <button onClick={() => setMuted(!muted)}>
+            <button className='modalButton' onClick={() => setMuted(!muted)}>
               {muted ? (
-                <FaVolumeMute className='w-6 h-6' />
+                <FaVolumeMute className='h-6 w-6' />
               ) : (
-                <FaVolumeUp className='w-6 h-6' />
+                <FaVolumeUp className='h-6 w-6' />
               )}
             </button>
           </div>
         </div>
-
         <div className='flex space-x-16 rounded-b-md bg-[#181818] px-10 py-8'>
           <div className='space-y-6 text-lg'>
             <div className='flex items-center space-x-2 text-sm'>
               <p className='font-semibold text-green-400'>
-                {Math.round(movie?.vote_average * 10)}% Match
+                {movie!.vote_average * 10}% Match
               </p>
               <p className='font-light'>
                 {movie?.release_date || movie?.first_air_date}
@@ -116,17 +195,17 @@ function NetflixModal() {
               <p className='w-5/6'>{movie?.overview}</p>
               <div className='flex flex-col space-y-3 text-sm'>
                 <div>
-                  <span className='text-[gray]'>Genres: </span>
+                  <span className='text-[gray]'>Genres:</span>{' '}
                   {genres.map((genre) => genre.name).join(', ')}
                 </div>
 
                 <div>
-                  <span className='text-[gray]'>Original language: </span>
+                  <span className='text-[gray]'>Original language:</span>{' '}
                   {movie?.original_language}
                 </div>
 
                 <div>
-                  <span className='text-[gray]'>Total votes: </span>
+                  <span className='text-[gray]'>Total votes:</span>{' '}
                   {movie?.vote_count}
                 </div>
               </div>
@@ -134,8 +213,8 @@ function NetflixModal() {
           </div>
         </div>
       </>
-    </Modal>
+    </MuiModal>
   );
 }
 
-export default NetflixModal;
+export default Modal;
