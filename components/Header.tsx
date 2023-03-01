@@ -46,12 +46,13 @@ const Header = () => {
         <AiOutlineSearch className='hidden sm:inline h-6 w-6' />
         <p className='hidden lg:inline'>Kids</p>
         <FaBell className='h-6 w-6' />
-        <img
-          src='https://rb.gy/g1pwyx'
-          onClick={logout}
-          alt=''
-          className='cursor-pointer rounded'
-        />
+        <Link href='/account'>
+          <img
+            src='https://rb.gy/g1pwyx'
+            alt=''
+            className='cursor-pointer rounded'
+          />
+        </Link>
       </div>
     </header>
   );
