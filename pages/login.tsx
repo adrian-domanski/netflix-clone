@@ -33,13 +33,13 @@ function Login() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Image
-        src='https://rb.gy/p2hphi'
+        src='/img/background.webp'
         alt=''
         fill
         className='-z-10 object-cover !hidden opacity-60 sm:!inline'
       />
       <img
-        src='https://rb.gy/ulxxee'
+        src='/img/logo.png'
         className='absolute left-4 top-4 cursor-pointer object-contain md:left-10 md:top-6'
         width={150}
         height={150}

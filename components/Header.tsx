@@ -27,7 +27,7 @@ const Header = () => {
       <div className='flex item-center space-x-2 md:space-x-10'>
         {/* This is an svg thats why I don't use <Image /> */}
         <Image
-          src='https://rb.gy/ulxxee'
+          src='/img/logo.png'
           alt='Netflix'
           width={100}
           height={100}
@@ -50,7 +50,7 @@ const Header = () => {
         <FaBell className='h-6 w-6' />
         <Link href='/account'>
           <img
-            src='https://rb.gy/g1pwyx'
+            src='/img/face.png'
             alt=''
             className='cursor-pointer rounded'
           />
