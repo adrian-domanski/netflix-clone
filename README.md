@@ -27,7 +27,7 @@ I've implemented:
 login: example@gmail.com   
 password: 123456
 
-## How to test payment process?
+## 💵 How to test payment process?
 Right now app is in the test mode so you can use these test card data to pay for your subscription:
 
 #### Card number: 4242 4242 4242 4242
