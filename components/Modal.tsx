@@ -60,8 +60,16 @@ function Modal() {
         const index = data.videos.results.findIndex(
           (element: Element) => element.type === 'Trailer'
         );
-        setTrailer(data.videos?.results[index]?.key);
+
+        const trailerId = data.videos?.results[index]?.key
+        if(trailerId) {
+          setTrailer(trailerId);
+        } else {
+          setTrailer("ym1zJGAW3WE")
+        }
+
       }
+      
       if (data?.genres) {
         setGenres(data.genres);
       }
@@ -141,7 +149,7 @@ function Modal() {
           <FaTimes className='h-6 w-6' />
         </button>
 
-        <div className='relative pt-[56.25%]'>
+        <div className='relative pt-[56.25%] bg-black'>
           <ReactPlayer
             url={`https://www.youtube.com/watch?v=${trailer}`}
             width='100%'
