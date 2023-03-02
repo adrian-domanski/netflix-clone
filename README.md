@@ -1,6 +1,4 @@
 
-## 👉 Open [netflix.clone.app](https://my-clon-netflix.vercel.app/) to view it in the browser.
-
 ## yet another Netflix clone app 🤷
 
 ## About
@@ -37,3 +35,5 @@ Right now app is in the test mode so you can use these test card data to pay for
 #### CVC: any 3 digit number
 
 For more information you can check [Stripe's list of cards numbers](https://stripe.com/docs/testing#cards).
+
+## 👉 Open [netflix.clone.app](https://my-clon-netflix.vercel.app/) to view it in the browser.
