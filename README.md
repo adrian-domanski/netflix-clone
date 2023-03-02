@@ -1,17 +1,15 @@
-### 🚧 Under construction, please hold on to buying your subscriptions yet 👨‍💻
 
-# just another Netflix clone app 🤷
+## yet another Netflix clone app 🤷
 
 ## About
 
-ℹ️ This is a Netflix clone with IMDb API integration, and some Stripe magic for subscriptions
+ℹ️ This is a Netflix clone with IMDb API integration, some Stripe magic for subscriptions, and Firebase for cloud storage.
 
-So far I've created:
-- Netflix home page
-- IMDb API integration
-- Firebase authentication and session persistence
-- Movie trailers when you click on thumbnails / more info
-- About movie popup
+I've implemented:
+- Netflix login page - you can use example credentials below if you don't want to register
+- IMDb API integration - for movie thumbnails, trailers and descriptions
+- Firebase for authentication and database
+- Stripe payments - recurring subscriptions same as on Netflix (user can change their plan, unsubscribe etc.)
 
 ## 💻 What did I use?
 
@@ -22,10 +20,22 @@ So far I've created:
 * Firebase (auth)
 * Recoil.js (state management)
 * ReactPlayer (video players)
+* Stripe
+* MUI
 
-## 🎫 Example credentials
+## 🧑‍💼 Example credentials
 login: example@gmail.com   
 password: 123456
+
+## How to test the payment process (Stripe)?
+Right now app is in the test mode so you can use these test card data to pay for your subscription:
+
+### Card number: 4242 4242 4242 4242
+### MM/YY: Any date in the future
+### CVC: any 3 digit number
+Rest of the information doesn't matter
+
+For more information you can check [Stripe's list of cards numbers](https://stripe.com/docs/testing#cards).
 
 ## 👉 Open [netflix.clone.app](https://my-clon-netflix.vercel.app/) to view it in the browser.
 
