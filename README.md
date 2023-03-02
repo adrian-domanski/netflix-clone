@@ -1,4 +1,6 @@
 
+## 👉 Open [netflix.clone.app](https://my-clon-netflix.vercel.app/) to view it in the browser.
+
 ## yet another Netflix clone app 🤷
 
 ## About
@@ -27,15 +29,11 @@ I've implemented:
 login: example@gmail.com   
 password: 123456
 
-## How to test the payment process (Stripe)?
+## How to test payment process?
 Right now app is in the test mode so you can use these test card data to pay for your subscription:
 
-### Card number: 4242 4242 4242 4242
-### MM/YY: Any date in the future
-### CVC: any 3 digit number
-Rest of the information doesn't matter
+#### Card number: 4242 4242 4242 4242
+#### MM/YY: Any date in the future
+#### CVC: any 3 digit number
 
 For more information you can check [Stripe's list of cards numbers](https://stripe.com/docs/testing#cards).
-
-## 👉 Open [netflix.clone.app](https://my-clon-netflix.vercel.app/) to view it in the browser.
-
